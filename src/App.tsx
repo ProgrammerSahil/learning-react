@@ -1,29 +1,27 @@
 import { useEffect, useState, useRef } from 'react'
 import './App.css'
 
-function App() {
-  const countRef = useRef(0);
-  const [count, setCount] = useState(0);
 
-  const handleIncrement = () => {
-    countRef.current++;
-  }
-// this is interesting because pressing the button doesnt do much until nodemon(or whatever vite uses) rerenders the component and then the changes are reflected
-  useEffect(() => {
-    setCount(countRef.current);
-  }, [countRef.current])
+const App = () => {
 
-    return (
-      <><div className='parentContainer'>
-        <div className="mainCard">
-          <h2>Press the button</h2>
-          <button onClick={handleIncrement}>Count: {countRef.current}</button>
-        </div>
-        </div>
-      </>
-    )
+    const [blue, setBlue] = useState("0");
 
-  
+    const handleMouseDown = () => {
+        if(parseInt(blue)>240) {
+            setBlue("0")
+        };
+        let newBlue = parseInt(blue)+10>240?0:parseInt(blue)+10;
+        setBlue(newBlue.toString());
+    }
+
+  return(
+    <>
+    <div className='mainContainer' onMouseDown={handleMouseDown} style={{backgroundColor: `rgb(103, 85, ${blue})`}}>
+        <h2 className='mainHeading'>Hello, World</h2>
+
+    </div>
+    </>
+  )
 }
 
-export default App
+export default App;
