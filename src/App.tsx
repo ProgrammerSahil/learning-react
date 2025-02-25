@@ -1,10 +1,12 @@
 import { useEffect, useState, useRef } from 'react'
 import './App.css'
+import axios, { all } from 'axios';
 
 
 const App = () => {
 
     const [blue, setBlue] = useState("0");
+    const [wrestlers, setWrestlers] = useState();
 
     const handleMouseDown = () => {
         if(parseInt(blue)>240) {
@@ -13,6 +15,20 @@ const App = () => {
         let newBlue = parseInt(blue)+10>240?0:parseInt(blue)+10;
         setBlue(newBlue.toString());
     }
+
+    const getWrestlersData = async () => {
+      try{
+        const allOfThemAPIResponse = await axios.get("http://localhost:3000/wrestler/showall");
+        setWrestlers(allOfThemAPIResponse.data);
+      }catch(error){
+        console.log(error);
+      }
+      
+    }
+
+    useEffect(() => {
+      getWrestlersData();
+    }, [])
 
   return(
     <>
