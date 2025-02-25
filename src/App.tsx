@@ -1,12 +1,13 @@
 import { useEffect, useState, useRef } from 'react'
 import './App.css'
-import axios, { all } from 'axios';
+import axios from 'axios';
+import Wrestlers from './components/Wrestlers';
 
 
 const App = () => {
 
     const [blue, setBlue] = useState("0");
-    const [wrestlers, setWrestlers] = useState();
+    const [wrestlers, setWrestlers] = useState({});
 
     const handleMouseDown = () => {
         if(parseInt(blue)>240) {
@@ -34,8 +35,8 @@ const App = () => {
     <>
     <div className='mainContainer' onMouseDown={handleMouseDown} style={{backgroundColor: `rgb(103, 85, ${blue})`}}>
         <h2 className='mainHeading'>Hello, World</h2>
-
     </div>
+    <Wrestlers wrestlerObject={wrestlers} />
     </>
   )
 }
