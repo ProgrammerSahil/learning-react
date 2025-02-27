@@ -4,25 +4,20 @@ import React, { useEffect, useState } from "react";
 const Wrestlers = ({ wrestlerObject }) => {
   const [wrestlerData, setWrestlerData] = useState(null);
 
-  if (!wrestlerObject || !wrestlerObject.data) return <p>Loading...</p>;
   useEffect(() => {
-    if (wrestlerObject) {
+    if (wrestlerObject.data) {
       setWrestlerData(wrestlerObject.data.roster);
+      console.log(wrestlerData);
     }
+    
   }, [wrestlerObject]);
-  console.log(wrestlerData);
+  
+  if (!wrestlerObject || !wrestlerObject.data) return <p>Loading...</p>;
+  
 
   return(
         <div>
-            {wrestlerData ? (
-                <ul>
-                    {Object.entries(wrestlerData).map((wrestler, index) => (
-                        <li key={index}>{wrestler}</li>
-                    ))}
-                </ul>
-            ) : (
-                <p>No Wrestlers Available</p>
-            )}
+           
         </div>
     );
 };
